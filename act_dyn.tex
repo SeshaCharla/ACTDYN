@@ -1,0 +1,93 @@
+t \documentclass[letterpaper, 11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{inputenc}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{extarrows}
+\usepackage{xcolor}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
+\usepackage{multicol}
+\usepackage{leftindex}
+
+% Listings
+\usepackage{listings}
+\usepackage{color}
+\input{lst_style.tex}
+
+% NewCommands
+\newcommand{\peq}{ \mathrel{+}= }
+\newcommand{\muleq}{ \mathrel{*}= }
+\newcommand{\bm}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+\newcommand{\lx}[2]{\leftindex #1 {#2}}
+\newcommand{\norm}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\itbf}[1]{\textit{\textbf{#1}}}
+\newcommand{\mdet}[1]{\norm{\begin{matrix} #1 \end{matrix}}}
+
+
+
+\title{Parametric Model Identification for Motor-Propeller Actuator Dynamics}
+\author{Sesha N. Charla}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Aerodynamic Model}
+\subsection{Thrust model}
+\subsection{Drag model}
+%===============================================================================
+\newpage
+
+
+\section{BLDC Motor Model}
+\subsection{Static Model}
+\subsection{Dynamic Model (without Propeller)}
+%===============================================================================
+\newpage
+
+
+\section{BLDC Motor with Propeller Model}
+%===============================================================================
+\newpage
+
+
+\section{RPM sensing algorithm}
+\subsection{Algorithm}
+\subsection{Validation}
+%===============================================================================
+\newpage
+
+
+\section{Static Model Parameter Identification}
+\subsection{BLDC Motor}
+\subsection{Propeller Aerodynamics}
+%===============================================================================
+\newpage
+
+
+\section{Dynamic Model Parameter Identification}
+\subsection{BLDC Motor}
+\subsection{BLDC Motor and Propeller}
+%===============================================================================
+\newpage
+
+
+\section{Conclusion: Model and Model Parameters}
+%===============================================================================
+\newpage
+
+
+\section{Gyroscopic Effects of Propeller Inertia}
+%===============================================================================
+\newpage
+
+
+\end{document}
