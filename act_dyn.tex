@@ -39,17 +39,15 @@
 \begin{document}
 \maketitle
 \tableofcontents
+
 \newpage
 \section{Aerodynamic Model}
-\subsection{Thrust model}
-\subsection{Drag model}
+\input{secs/aero.tex}
 %===============================================================================
 \newpage
-
-
 \section{BLDC Motor Model}
 \subsection{ESC and non-linear input compensation}
-\subsection{Static Model}
+\input{./secs/bldc_static.tex}
 \subsection{Dynamic Model (without Propeller)}
 %===============================================================================
 \newpage
@@ -90,6 +88,8 @@
 \section{Gyroscopic Effects of Propeller Inertia}
 %===============================================================================
 \newpage
-
+\newpage
+\bibliographystyle{unsrt}
+\bibliography{refs}
 
 \end{document}
