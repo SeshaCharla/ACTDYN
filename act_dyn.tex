@@ -49,11 +49,15 @@
 \maketitle
 \tableofcontents
 
-\newpage
 %===============================================================================
 \newpage
-\section{BLDC Motor Model}
-\input{secs/ESC_input.tex}
+\section{RPM Measurement}
+\input{secs/rpm_feedback.tex}
+%===============================================================================
+\newpage
+\section{BLDC Motor Model and Static Calibration}
+\input{./secs/ESC_input.tex}
+\input{./secs/NormOmega.tex}
 \input{./secs/bldc_static.tex}
 \input{./secs/BLDC_model.tex}
 %===============================================================================
@@ -64,16 +68,6 @@
 \input{./secs/bldc_prop_model.tex}
 %===============================================================================
 \newpage
-\section{RPM Measurement}
-\input{secs/rpm_feedback.tex}
-\subsection{Validation}
-%===============================================================================
-\newpage
-\section{Static Model Parameter Identification}
-\subsection{BLDC Motor}
-\subsection{Propeller Aerodynamics}
-%===============================================================================
-\newpage
 \section{Dynamic Model Parameter Identification}
 \subsection{BLDC Motor}
 \subsection{BLDC Motor and Propeller}
@@ -82,8 +76,8 @@
 \section{Conclusion: Model and Model Parameters}
 \subsection{Parametric Form}
 %===============================================================================
-\newpage
-\section{Gyroscopic Effects of Propeller Inertia}
+%\newpage
+%\section{Gyroscopic Effects of Propeller Inertia}
 %===============================================================================
 \bibliographystyle{unsrt}
 \bibliography{refs}

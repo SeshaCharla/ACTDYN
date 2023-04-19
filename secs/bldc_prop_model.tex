@@ -1,0 +1,129 @@
+\subsection{BLDC Motor with Propeller}
+Adding propeller moment of inertia and the moment due to propeller drag into the BLDC motor model.
+\begin{align*}
+    (J_m + J_p) \dot \omega + (K_rK_v + b_f) \omega + M_f &= u K_r V_{in} - C_D \omega^2\\
+    Let, \qquad J_m + J_p &= J\\
+    J\dot \omega + (K_rK_v + b_f) \omega + C_D \omega^2 + M_f &= u K_r V_{in}
+    \text{Substituting, } K_r u &= (K_r K_v  + b_f) u_\omega + \frac{M_f}{\hat V_{in}}\\
+    J\dot \omega + (K_rK_v + b_f) \omega + C_D \omega^2 + M_f &= V_{in} \left((K_r K_v  + b_f) u_\omega + \frac{M_f}{\hat V_{in}} \right)\\
+\end{align*}
+
+
+We get the linearised model using small perturbtation:
+\begin{align*}
+     J \delta \dot \omega + (K_r K_v + b_f) \delta \omega + 2 C_D \omega_0 \delta \omega  &= \delta u_\omega (K_r K_v  + b_f)  V_{in}\\
+    J \delta \dot \omega + (K_r K_v + b_f + 2 C_D \omega_0) \delta \omega  &=\delta u_\omega (K_r K_v  + b_f)  V_{in}
+\end{align*}
+Thus we have the trannsfer function model:
+\begin{align*}
+    \frac{\delta \omega(s)}{\delta u_\omega (s)} &= \frac{(K_r K_v  + b_f)  V_{in}
+}{J s + (K_rK_v + b_f + 2 C_D \omega_0)} = \frac{\frac{K_v}{(K_rK_v + b_f + 2 C_D \omega_0)} V_{in}}{\frac{J}{(K_r K_v + b_f + 2 C_D \omega_0)}s + 1} = \frac{K_p}{\tau_p s + 1}\\
+    \text{Where, }\qquad &\\
+    K_p &= \frac{K_r}{(K_rK_v + b_f + 2 C_D \omega_0)} V_{in}\\
+    \tau_p &= \frac{J}{(K_rK_v + b_f + 2 C_D \omega_0)}
+\end{align*}
+
+Thus both gain and time-constant vary with the nominal rpm. Effectively, the cutoff frequency is the only parameter that varies with nominal rpm. When the above trannsfer function is written in the form:
+\begin{align*}
+    \frac{\delta \omega(s)}{\delta u(s)} &= \frac{k_p}{s + \omega_p} = \frac{\frac{K_r V_{in}}{J}}{s + \frac{(K_rK_v + b_f + 2 C_D \omega_0)}{J}}\\
+    \text{Where, } \qquad &\\
+    k_p &= \frac{K_r V_{in}}{J} & (\text{Independent of } \omega_0)\\
+    \omega_p &= \frac{(K_rK_v + b_f + 2 C_D \omega_0)}{J}
+\end{align*}
+
+This information will be used for establishing the validity of identified models.
+
+%===============================================================================
+\subsection{Parametric Identification model for BLDC motor - propeller dyanmcis}
+\subsubsection{Continuous Parametric Model}
+Let, $J$ be the propeller moment on inertia along the normal axis. Then,
+\begin{align*}
+    J \dot \omega &= -(K_rK_v + b_f) \omega_m - M_f - C_D \omega_m^2 + u_{in} K_r V_{in}\\
+   %===
+    \implies \dot \omega &= -\frac{(K_rK_v + b_f)}{J} \omega_m - \frac{M_f}{J} - \frac{C_D}{J} \omega_m^2 + u \frac{K_r V_{in}}{J}
+\end{align*}
+
+Hence, we have the continuous parametric model:
+$$ \dot \omega =
+    \underbrace{\begin{bmatrix}
+    - \omega^2 & - \omega  & -1
+\end{bmatrix}}_{\Phi^T(\omega)}
+\underbrace{\begin{bmatrix}
+    \frac{C_{D}}{J} \\
+    \frac{(K_rK_v + b_f)}{J}  \\
+    \frac{M_f}{J}
+\end{bmatrix} }_{\pmb \theta}
+    +\frac{K_r V_{in}}{J}u $$
+
+Let,
+\begin{align*}
+    a_1 = \frac{C_{D}}{J}  \qquad
+    a_2 &= \frac{(K_rK_v + b_f)}{J} \qquad
+    a_3 =   \frac{M_f}{J}\\
+    \\
+    \pmb \theta = \begin{bmatrix}a_1 & a_2 & a_3 \end{bmatrix}^T &\qquad
+    b =  \frac{K_r V_{in}}{J}
+\end{align*}
+
+$$\therefore \dot \omega = \Phi^T(\omega) \pmb \theta + b u$$
+
+\subsubsection{Descritezed Parametric Model}
+Descritizing the above model using euler-method $\left(\dot \omega = \frac{\omega[k] - \omega[k-1]}{h}\right)$, with $h$ as the sampling interval:
+
+\begin{align*}
+    \frac{\omega[k] - \omega[k-1]}{h} &=
+    \begin{bmatrix} - \omega^2[k-1] & - \omega[k-1]  &  -1 \end{bmatrix}
+    \begin{bmatrix}
+        a_1 \\ a_2 \\ a_3
+    \end{bmatrix}
+    + bu[k-1]\\
+    %===
+    \omega[k] &= h \begin{bmatrix} - \omega^2[k-1] & - \omega[k-1]  & -1 \end{bmatrix}
+    \begin{bmatrix}
+        a_1 \\
+        a_2 - \frac{1}{h} \\
+        a_3 \\
+    \end{bmatrix}
+    + b  h u[k-1]\\
+    %===
+    &= h \begin{bmatrix} - \omega^2[k-1] & -\omega[k-1] & -1 & u[k] \end{bmatrix}
+    \begin{bmatrix}
+        a_1 \\
+        a_2 - \frac{1}{h} \\
+        a_3 \\
+        b
+    \end{bmatrix}
+\end{align*}
+
+Let,
+\begin{align*}
+    \pmb \theta_h = h
+    \begin{bmatrix}
+        a_1 \\
+        a_2 - \frac{1}{h} \\
+        a_3 \\
+        b
+    \end{bmatrix} =
+    h
+    \begin{bmatrix}
+        \frac{C_{D}}{J} \\
+        \frac{(K_rK_v + b_f)}{J} - \frac{1}{h}  \\
+        \frac{M_f}{J}\\
+        \frac{K_r V_{in}}{J}
+    \end{bmatrix}
+    \qquad \text{and} \qquad
+    \Phi(\omega[k-1], u[k])^T &=  \begin{bmatrix} - \omega^2[k-1] & -\omega[k-1] & -1 & u[k-1] \end{bmatrix}
+\end{align*}
+
+hence, we have the parametric model in least-squares form:
+\begin{align*}
+    \omega[k] &= \Phi(\omega[k-1], u[k-1])^T \pmb \theta_h
+\end{align*}
+
+\subsubsection{Input singal (persistance of exitation and frequency limitation)}
+\textbf{Note:}
+\begin{enumerate}
+    \item PE order of a square wave of half-period m is m+1.
+    \item PE order of a single sine wave is 2.
+\end{enumerate}
+Hence, a sum of sinusoids wave with atleast 3 waves within the frequency of 45 Hz (the limitation is due to the structure) can be used to estimate the parameters and the coefficients of force and torque generated.

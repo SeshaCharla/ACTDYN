@@ -1,0 +1,46 @@
+\subsection{Brushless DC motor speed-troque characteristics \cite{crowder2019electric}}
+
+The torque and speed characteristics can be determined by the balance between motor's mechanical output power adn electrical input power over a conduction period:
+\begin{align*}
+    P &= \omega_m T_e = 2 e_p I\\
+    e_p &= N_p B_g \pi r l \omega_m\\
+    \text{Where, } \qquad &\\
+    \omega_m &- \text{Mechanical rpm}\\
+    T_e      &- \text{Electromagnetic torque}\\
+    e_p      &- \text{Back emf}
+\end{align*}
+
+The factor 2 is the result of current flowing through 2-motor phases (trapesoidal wave form).\\
+
+We have, electromagnetic torque:
+\begin{align*}
+    T_e &= 4 N_p B_g l r I &[\because \text{Lenz law}]
+\end{align*}
+let, $E = 2 e_p$. We have,
+\begin{align*}
+    E &= k \psi \omega_m = K_v \omega_m\\
+    T_e &= k \psi I = K_T I\\
+\text{Where, } \qquad &\\
+    k &= 4 N_p  &(\text{Armature Constant})\\
+    \psi &= B_g \pi  r l  &(\text{Flux})
+\end{align*}
+
+Thus, ideally back-emf constant and torque constants are same.\\
+
+Using the above equations, the following steady-state torque speed characteristics can be drived. We have, the instantaneous voltage equation:
+\begin{align*}
+    V_s &= E + I R\\
+\text{Where, } \qquad &\\
+    V_s &- \text{Supply voltage}\\
+    I &- \text{Total DC current}\\
+    R &- \text{Sum of the terminal phase ressistances}
+\end{align*}
+
+We have torque speed relationship:
+\begin{align*}
+    \omega_m &= \omega_0 \left( 1 - \frac{T}{T_0} \right)\\
+\text{Where, } \qquad &\\
+    \omega_0 &= \frac{V_s}{k \psi} & (\text{No-load Speed})\\
+    T_0 &= k \psi I_0              & (\text{Stall Torque})\\
+    I_0 &= \frac{V_s}{R}           & (\text{Stall Current})
+\end{align*}
