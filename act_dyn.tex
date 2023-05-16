@@ -48,23 +48,27 @@
 \begin{document}
 \maketitle
 \tableofcontents
-
+\newpage
+\newpage
+%===============================================================================
+\newpage
+\section{Brushless DC motor model}
+\subsection{Brushless DC motor speed-troque characteristics \cite{crowder2019electric}}
+\input{./secs/bldc_static.tex}
+\input{./secs/BLDC_model.tex}
+\input{./secs/aero.tex}
 %===============================================================================
 \newpage
 \section{RPM Measurement}
 \input{secs/rpm_feedback.tex}
 %===============================================================================
 \newpage
-\section{BLDC Motor Model and Static Calibration}
+\section{Input definition and Static Calibration}
 \input{./secs/ESC_input.tex}
 \input{./secs/NormOmega.tex}
-\input{./secs/bldc_static.tex}
-\input{./secs/BLDC_model.tex}
 %===============================================================================
 \newpage
 \section{BLDC Motor with Propeller Model}
-\subsection{Aerodynamic Model}
-\input{secs/aero.tex}
 \input{./secs/bldc_prop_model.tex}
 %===============================================================================
 \newpage

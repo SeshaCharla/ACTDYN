@@ -18,17 +18,8 @@ Pixhawk-4 uses a switching frequency of $400\,Hz$ for its PWM signals (can be sw
 The current ESC that has the rpm-feedback capabilites has an operating range between $1110 \, \mu s$ and $1890 \, \mu s$. After that, the ESC switchs to a constant power mode which sets the rpm to a constant.
 \begin{align*}
     \text{Period of the PWM wave } &= \frac{1}{400} \times 10^6 \, \mu s = 2500 \, \mu s\\
-    \text{Minimum Operating Duty Cycle } &= \frac{1100}{2500} = 0.444\\
+    \text{Minimum Operating Duty Cycle } &= \frac{1110}{2500} = 0.444\\
     \text{Maximum Operating Duty Cycle } &= \frac{1890}{2500} = 0.756\\
 \end{align*}
 
-\subsection{Inverting the non-linear input compensation}
-
-$u$ will be considered to be the actual input to the system and system identification with the propeller. The input is implemented by inverting the non-linear filter.
-
-
-In the case of identifying the linearised model,
-$$\delta u = g'_u(u_{p}) \delta u_p = g'_{u0} \delta u_p,
-\qquad \text{Where, } g'_{u0} = \frac{d g_u}{d u_p} $$\\
-
-It turns out that the parameters of the above non-linear filter are not estimatable with the give information. To solve this problem, we chose normalized no-load angular velocity of the motor as the input instead.
+$u$ can be considered to be the actual input to the system and system identification with the propeller. It turns out that the parameters of the above non-linear filter are not estimatable with the give information. To solve this problem, we chose normalized no-load angular velocity of the motor as the input instead.

@@ -1,6 +1,6 @@
 \subsection{Normalized No-load Angular Velocity Input}
 
-We have the no-load dynamic model for the BLDC motor derived in the latter sections:
+We have the no-load dynamic model for the BLDC motor:
 \begin{align*}
     J_m \dot \omega_m + (K_r K_v  + b_f) \omega_m + M_f &= u K_r V_{in}
 \end{align*}
@@ -14,7 +14,7 @@ Substituting the non-linear input filter:
     \implies \frac{(K_r K_v  + b_f)}{K_r} \left(\frac{\omega_m}{V_{in}}\right) + \frac{M_f}{K_r V_{in}} &= g_u(u_p)
 \end{align*}
 
-\itbf{Definition}: Let, $u_{\omega}$ be the no-load angular velocity of the motor at unit supply voltage for the given pwm input ($u_p$). Also, let us call it "Normalized no-load angular velocity".
+\itbf{Definition}: Let, $u_{\omega}$ be the no-load angular velocity of the motor at unit supply voltage for the given pwm input ($u_p$). Also, let us call it "\itbf{Normalized no-load angular velocity}".
 \begin{align*}
     u_{\omega} &= \frac{\omega_m}{V_{in}} \text{  at  } u_p
 \end{align*}
@@ -28,12 +28,10 @@ Assuming, the supply voltage will not be varying much and the variation will be 
 \begin{align*}
     u_{\omega} &= \left(\frac{K_r}{K_r K_v  + b_f} \right) g_u(u_p) - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{\hat V_{in}}
 \end{align*}
-
 Let,
 \begin{align*}
     g_w (u_p) &= \left(\frac{K_r}{K_r K_v  + b_f} \right) g_u(u_p) - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{\hat V_{in}}
 \end{align*}
-
 The parmeters of assumed structure of $g_w(.)$ are estimatable form the experimental data ($\omega, u_p$) unlike $g_u$. Though, this method introduces additional uncertainity because of the $\hat V_{in}$, but it can be justifiably assumed to be far less than the uncertainity due to fitting ($\omega-u_p$) curve with for $g_w(.)$.
 
 Writing, $u_{\omega}$ interms of actual PWM input to the motor $u$.
@@ -58,7 +56,9 @@ The choice of bias as $1110$ was due to the fact that the maximum input that can
 \end{figure}
 Thus,
 \begin{align*}
-    &\boxed{g_w(u_p) = 22 \ln(u_p - 1110)- 47.5 }\\
-    and, &\\
-    &\, g'_w(u_p) = \frac{22}{u_p - 1110}
+    \boxed{g_w(u_p) = 22 \ln(u_p - 1110)- 47.5 }
+\end{align*}
+and,
+\begin{align*}
+    g'_w(u_p) = \frac{22}{u_p - 1110}
 \end{align*}
