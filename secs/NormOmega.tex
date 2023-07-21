@@ -36,9 +36,12 @@ The parmeters of assumed structure of $g_w(.)$ are estimatable form the experime
 
 Writing, $u_{\omega}$ interms of actual PWM input to the motor $u$.
 \begin{align*}
-    u_{\omega} &= \left(\frac{K_r}{K_r K_v  + b_f} \right) u - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{\hat V_{in}}\\
-    \implies K_r u &= (K_r K_v  + b_f) u_\omega + \frac{M_f}{\hat V_{in}}
+    u_{\omega} &= \left(\frac{K_r}{K_r K_v  + b_f} \right) u - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{\hat V_{in}}
 \end{align*}
+\begin{equation}
+    \implies K_r u = (K_r K_v  + b_f) u_\omega + \frac{M_f}{\hat V_{in}}
+    \label{eqn:norm_in}
+\end{equation}
 Thus, $u_{\omega}$ is $u$ scaled lineraly.
 
 \subsubsection{Logarithmic form for $g_w(.)$ and Parameter Estimation}
@@ -61,4 +64,11 @@ Thus,
 and,
 \begin{align*}
     g'_w(u_p) = \frac{22}{u_p - 1110}
+\end{align*}
+
+
+\subsubsection{Static mapping with propeller}
+Form eqn.~\ref{eqn:prop} and introducing the normalized input from eqn.~\ref{eqn:norm_in}:
+\begin{align*}
+    J\dot \omega + (K_rK_v + b_f) \omega + C_D \omega^2 + M_f = u K_r V_{in}
 \end{align*}
