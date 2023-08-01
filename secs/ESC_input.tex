@@ -12,7 +12,7 @@ $$V_s = u V_{in} \qquad u \in [0, 1]$$
 
 $u$ is considered as the input to the motor-propeller system and the necessary invertion will be performed for transmitting the signals.
 
-\itbf{Scaling PWM Singal Duty cycle based on switching frequency}
+\itbf{Scaling PWM Singal Duty cycle based on switching frequency}:
 Pixhawk-4 uses a switching frequency of $400\,Hz$ for its PWM signals (can be swithed to $50 \, Hz$ which is not that usefull in case of BLDC motors but usefull for servos). The controller thus scales the PWM duty cycle to the duration of on-time of the signal in its period in 'microseconds'. These inputs are handelled as integer types within the range [800, 2200]\cite{px4_pwm}.
 
 The current ESC that has the rpm-feedback capabilites has an operating range between $1110 \, \mu s$ and $1890 \, \mu s$. After that, the ESC switchs to a constant power mode which sets the rpm to a constant.
