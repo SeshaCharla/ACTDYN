@@ -34,28 +34,36 @@ In the experimental setup (Figure~\ref{fig:expt_setup}),  the total moment measu
     M = C_D \omega^2 + b_f \omega + M_f
 \end{align*}
 
-The aerodynamic coefficients are estimated from the static measuremnts using least-squares estimation. The results of estimation are tabulated:
-
-\begin{align*}
-    C_T &= 7.1e-6 \, {N.s^2/rad^2}\\
-    C_D &= 2.5e-8 \, {Nm.s^2/rad^2}\\
-    b_f &= 9.3e-6 \, {Nm.s/rad}\\
-    M_f &= 5.8e-7  \, {Nm}
-\end{align*}
+The aerodynamic coefficients are estimated from the static measuremnts using least-squares estimation.
 
 \begin{figure}[H]
     \begin{minipage}{0.49\textwidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width = \textwidth]{./figs/aero/Fx.eps}
+            \includegraphics[width = \textwidth]{./figs/aero/Thrust_curve.eps}
         \end{figure}
         \caption{Variation of thrust with rpm}
     \end{minipage}
     \begin{minipage}{0.49\textwidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width = \textwidth]{./figs/aero/Mx.eps}
+            \includegraphics[width = \textwidth]{./figs/aero/Drag_curve.eps}
             \caption{Variation of drag moment with rpm}
         \end{figure}
     \end{minipage}
 \end{figure}
+
+The moment data has more variation from model due to the unmodelled aerodynamic effects such as aerodynamic-flutter. Thus we have the estimates of force coefficients:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c l}
+        \hline \hline
+        Parameter & Value \\ \hline \hline
+        $C_T$ & $7.2581 \times 10^{-06}$ $N/(rad/s)^2$  \\
+        $C_D$ & $3.6088 \times 10^{-08}$ $N.m/(rad/s)^2$ \\
+        $b_f$ & $0.0$ $N.m/(rad/s)$\\
+        $M_f$ & $1.3135 \times 10^{-3}$ $N.m$\\ \hline \hline
+    \end{tabular}
+    \caption{Estimates Force coefficients}
+\end{table}
