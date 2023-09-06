@@ -77,6 +77,9 @@ At every interrupt trigger (in ISR)
         $P_c = C_c$\;
     \end{algorithm}
 
+
+\bigskip
+
 At every sampling instance (in $get\_rpm()$):
 
     \begin{algorithm}[H]
@@ -93,18 +96,21 @@ At every sampling instance (in $get\_rpm()$):
         $\pmb{\delta t_k} = \pmb 0$\;
     \end{algorithm}
 
+
+\bigskip
+
 \begin{figure}[H]
     \begin{minipage}{0.49\textwidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width = \textwidth]{./figs/rpm_feedback/rpm_meas_noprop.eps}
+            \includegraphics[width = 0.9\textwidth]{./figs/rpm_feedback/rpm_meas_noprop.eps}
             \caption*{Without Propeller}
         \end{figure}
     \end{minipage}
     \begin{minipage}{0.49\textwidth}
         \begin{figure}[H]
             \centering
-            \includegraphics[width = \textwidth]{./figs/rpm_feedback/rpm_meas_prop.eps}
+            \includegraphics[width = 0.9\textwidth]{./figs/rpm_feedback/rpm_meas_prop.eps}
             \caption*{With Propeller}
         \end{figure}
     \end{minipage}

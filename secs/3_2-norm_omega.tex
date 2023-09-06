@@ -52,11 +52,26 @@ Based on the experimental data, $g_w(.)$ is assumed to have the following logari
 \end{align*}
 The choice of bias as $1110$ was due to the fact that the maximum input that can be given to the esc-motor sytem with no response is 1110. The values of $a, b$ are obtained by lineraly fitting $u_\omega$ to $u_p$.
 
+The choice of logarithmic function ensures that the derivative of the inputs also closely fits the experimental data as shown in the figure bellow.
+
 \begin{figure}[H]
-    \centering
-    \includegraphics[width = 0.7\textwidth]{./figs/norm_omega/no-load_rpm.eps}
-    \caption{Logarithmic fit for $g_w()$}
+    \begin{minipage}{0.49\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width = \textwidth]{./figs/norm_omega/no-load_rpm.eps}
+            \caption*{$g_w()$}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width = \textwidth]{./figs/norm_omega/no-load_rpm_derivative.eps}
+            \caption*{$g'_w()$}
+        \end{figure}
+    \end{minipage}
+    \caption{Logarithmic fit}
 \end{figure}
+
 Thus,
 \begin{align*}
     \boxed{g_w(u_p) = 22 \ln(u_p - 1110)- 47.5 }
