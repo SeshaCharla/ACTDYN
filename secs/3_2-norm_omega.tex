@@ -1,20 +1,20 @@
 \subsection{Normalized Angular Velocity Input}
 
-We have the no-load dynamic model for the BLDC motor:
+We have the no-load dynamic model for the BLDC motor with propeller:
 \begin{align*}
-    J_m \dot \omega_m + (K_r K_v  + b_f) \omega_m + M_f &= u K_r V_{in}
+    J \dot \omega + b_m \omega + C_D \omega^2+ M_f &= u K_r V_{in}
 \end{align*}
-At steady state ($\dot \omega_m = 0$), the above equation becomes:
+At steady state ($\dot \omega = 0$), the above equation becomes:
 \begin{align*}
-    (K_r K_v  + b_f) \omega_m + M_f &= u K_r V_{in}
+    b_m \omega + C_D \omega^2 +  M_f &= u K_r V_{in}
 \end{align*}
 Substituting the non-linear input filter:
 \begin{align*}
-    (K_r K_v  + b_f) \omega_m + M_f &= g_u(u_p) K_r V_{in}\\
-    \implies \frac{(K_r K_v  + b_f)}{K_r} \left(\frac{\omega_m}{V_{in}}\right) + \frac{M_f}{K_r V_{in}} &= g_u(u_p)
+    b_m \omega + C_D \omega^2 + M_f &= g_u(u_p) K_r V_{in}\\
+    \implies \frac{b_m}{K_r} \left(\frac{\omega_m}{V_{in}}\right) + \frac{V_{in}}{K_r} C_D \lr{\frac{\omega}{V_{in}}} + \frac{M_f}{K_r V_{in}} &= g_u(u_p)
 \end{align*}
 
-\itbf{Definition}: Let, $u_{\omega}$ be the no-load angular velocity of the motor at unit supply voltage for the given pwm input ($u_p$). Also, let us call it "\itbf{Normalized no-load angular velocity}".
+\itbf{Definition}: Let, $u_{\omega}$ be the angular velocity of the motor with propeller at unit supply voltage for the given pwm input ($u_p$). Also, let us call it "\itbf{Normalized no-load angular velocity}".
 \begin{align*}
     u_{\omega} &= \frac{\omega_m}{V_{in}} \text{  at  } u_p
 \end{align*}
