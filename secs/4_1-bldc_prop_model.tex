@@ -1,19 +1,27 @@
+Intoducing the input definition into the BLDC-motor model with propeller:
+\begin{align*}
+    & J\dot \omega + b_m \omega + C_D \omega^2 + M_f = u K_r V_{in} = K_r V_{in} g_\omega(u_\omega, \hat V_{in})\\
+    \implies & J \dot \omega + b_m \omega + C_D \omega^2 + M_f =K_r V_{in} \lr{\frac{b_m}{K_r} u_\omega + \frac{\hat V_{in}}{K_r} C_D u_\omega^2 + \frac{M_f}{K_r  \hat V_{in}}}\\
+\end{align*}
+\begin{equation}
+    J \dot \omega + b_m \omega + C_D \omega^2 + M_f \lr{1 - \frac{V_{in}}{\hat V_{in}}} = V_{in} b_m u_\omega + V_{in} \hat V_{in} C_D u_\omega^2\\
+\end{equation}
 
+
+\subsection{Small Perturbation Model}
 We get the linearised model using small perturbtation:
 \begin{align*}
-     J \delta \dot \omega + (K_r K_v + b_f) \delta \omega + 2 C_D \omega_0 \delta \omega  &= \delta u_\omega (K_r K_v  + b_f)  V_{in}\\
-    J \delta \dot \omega + (K_r K_v + b_f + 2 C_D \omega_0) \delta \omega  &=\delta u_\omega (K_r K_v  + b_f)  V_{in}
+    J \delta \dot \omega + b_m \delta \omega + 2 C_D \omega_0 \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + V_{in} \hat V_{in} C_D u_{\omega_0}}\\
+    J \delta \dot \omega + (b_m + 2 C_D \omega_0) \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + V_{in} \hat V_{in} C_D u_{\omega_0}}\\
+    \text{Laplace Transform:} \qquad &\\
+     \lr{Js + (b_m + 2 C_D \omega_0)} \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + V_{in} \hat V_{in} C_D u_{\omega_0}}
 \end{align*}
 Thus we have the trannsfer function model:
 \begin{align*}
-    \frac{\delta \omega(s)}{\delta u_\omega (s)} &=
-    \frac{(K_r K_v  + b_f)  V_{in}}{J s + (K_rK_v + b_f + 2 C_D \omega_0)} = \frac{\frac{V_{in}}{\left(1 + \frac{2 C_D}{K_r K_v + b_f} \omega_0 \right)}}{\frac{J}{(K_r K_v + b_f + 2 C_D \omega_0)}s + 1} = \frac{K_p}{\tau_p s + 1}\\
-    \text{Where, }\qquad &\\
-    K_p &= \frac{K_r K_v + b_f}{(K_rK_v + b_f + 2 C_D \omega_0)} V_{in}\\
-    \tau_p &= \frac{J}{(K_rK_v + b_f + 2 C_D \omega_0)}
+    \frac{\delta \omega(s)}{\delta u_\omega (s)} &= \frac{V_{in} b_m + V_{in} \hat V_{in} C_D u_{\omega_0}}{Js + (b_m + 2 C_D \omega_0)}
 \end{align*}
 
-Thus both gain and time-constant vary with the nominal rpm. Effectively, the cutoff frequency is the only parameter that varies with nominal rpm. When the above trannsfer function is written in the form:
+Thus both gain and time-constant increase with the nominal rpm.
 \begin{align*}
     \frac{\delta \omega(s)}{\delta u_w(s)} &= \frac{k_p}{s + \omega_p} = \frac{\frac{(K_rK_v + b_f) V_{in}}{J}}{s + \frac{(K_rK_v + b_f + 2 C_D \omega_0)}{J}}\\
     \text{Where, } \qquad &\\

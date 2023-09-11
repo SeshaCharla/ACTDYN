@@ -6,106 +6,36 @@ We have the no-load dynamic model for the BLDC motor with propeller:
 \end{align*}
 At steady state ($\dot \omega = 0$), the above equation becomes:
 \begin{align*}
-    b_m \omega + C_D \omega^2 +  M_f &= u K_r V_{in}
-\end{align*}
-Substituting the non-linear input filter:
-\begin{align*}
-    b_m \omega + C_D \omega^2 + M_f &= g_u(u_p) K_r V_{in}\\
-    \implies \frac{b_m}{K_r} \left(\frac{\omega_m}{V_{in}}\right) + \frac{V_{in}}{K_r} C_D \lr{\frac{\omega}{V_{in}}} + \frac{M_f}{K_r V_{in}} &= g_u(u_p)
+    b_m \omega + C_D \omega^2 +  M_f &= u K_r V_{in}\\
+    \implies \frac{b_m}{K_r} \left(\frac{\omega_m}{V_{in}}\right) + \frac{V_{in}}{K_r} C_D \lr{\frac{\omega}{V_{in}}}^2 + \frac{M_f}{K_r V_{in}} &= u
 \end{align*}
 
-\itbf{Definition}: Let, $u_{\omega}$ be the angular velocity of the motor with propeller at unit supply voltage for the given pwm input ($u_p$). Also, let us call it "\itbf{Normalized no-load angular velocity}".
+\itbf{Definition}: Let, $u_{\omega}$ be the angular velocity of the motor with propeller at unit supply voltage for the given pwm input ($u_p$). Also, let us call it "\itbf{Normalized angular velocity}".
 \begin{align*}
-    u_{\omega} &= \frac{\omega_m}{V_{in}} \text{  at  } u_p
+    u_{\omega} &= \frac{\omega}{V_{in}} \text{  at  } u = g_u(u_p)\\
+    \implies u &= \underbrace{\frac{b_m}{K_r} u_\omega + \frac{\hat V_{in}}{K_r} C_D u_\omega^2 + \frac{M_f}{K_r  \hat V_{in}}}_{g_\omega (u_\omega, \hat V_{in})}
 \end{align*}
-Thus,
-\begin{align*}
-    \left(\frac{K_r K_v  + b_f}{K_r} \right) u_{\omega} &+ \frac{M_f}{K_r V_{in}} = g_u(u_p)\\
-    \implies u_{\omega} &= \left(\frac{K_r}{K_r K_v  + b_f} \right) \left( g_u(u_p) - \frac{M_f}{K_r V_{in}} \right)\\
-    &= \left(\frac{K_r}{K_r K_v  + b_f} \right) g_u(u_p) - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{V_{in}}
-\end{align*}
-Assuming, the supply voltage will not be varying much and the variation will be captured in the input uncertainity. Let $V_{in}$ on the RHS be $\hat V_{in}$. thus:
-\begin{align*}
-    u_{\omega} &= \left(\frac{K_r}{K_r K_v  + b_f} \right) g_u(u_p) - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{\hat V_{in}}
-\end{align*}
-Let,
-\begin{align*}
-    g_w (u_p) &= \left(\frac{K_r}{K_r K_v  + b_f} \right) g_u(u_p) - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{\hat V_{in}}
-\end{align*}
-The parmeters of assumed structure of $g_w(.)$ are estimatable form the experimental data ($\omega, u_p$) unlike $g_u$. Though, this method introduces additional uncertainity because of the $\hat V_{in}$, but it can be justifiably assumed to be far less than the uncertainity due to fitting ($\omega-u_p$) curve with for $g_w(.)$.
 
-Writing, $u_{\omega}$ interms of actual PWM input to the motor $u$.
-\begin{align*}
-    u_{\omega} &= \left(\frac{K_r}{K_r K_v  + b_f} \right) u - \left(\frac{1}{K_r K_v  + b_f} \right) \frac{M_f}{\hat V_{in}}
-\end{align*}
-\begin{equation}
-    \implies K_r u = (K_r K_v  + b_f) u_\omega + \frac{M_f}{\hat V_{in}}
-    \label{eqn:norm_in}
-\end{equation}
-Thus, $u_{\omega}$ is $u$ scaled lineraly.
-
-\subsubsection{Logarithmic form for $g_w(.)$ and Parameter Estimation}
-
-Based on the experimental data, $g_w(.)$ is assumed to have the following logarithmic (natural-log) form:
-\begin{align*}
-    g_w(u_p) &= a \ln(u_p - 1110) + b
-\end{align*}
-The choice of bias as $1110$ was due to the fact that the maximum input that can be given to the esc-motor sytem with no response is 1110. The values of $a, b$ are obtained by lineraly fitting $u_\omega$ to $u_p$.
-
-The choice of logarithmic function ensures that the derivative of the inputs also closely fits the experimental data as shown in the figure bellow.
-
+The relationship between $u_\omega$ and $u_p$ can be estimated from the staic measuremnt data.
 \begin{figure}[H]
     \begin{minipage}{0.49\textwidth}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width = \textwidth]{./figs/norm_omega/no-load_rpm.eps}
-            \caption*{$g_w()$}
-        \end{figure}
+    We have:
+        \begin{align*}
+            u_\omega &= a u_p + b
+            \qquad a = 0.0696
+            \qquad b = -64.3266\\
+        \end{align*}
+    Also,
+        \begin{align*}
+            \because u &= g_\omega(u_\omega, \hat V_{in})\\
+            \implies g_u(u_p) &= g_\omega(a u_p  + b, \hat V_{in})\\
+        \end{align*}
     \end{minipage}
     \begin{minipage}{0.49\textwidth}
-        \begin{figure}[H]
+       \begin{figure}[H]
             \centering
-            \includegraphics[width = \textwidth]{./figs/norm_omega/no-load_rpm_derivative.eps}
-            \caption*{$g'_w()$}
+            \includegraphics[width = \textwidth]{./figs/norm_omega/no-load_rpm.eps}
+            \caption{$u_\omega$ as a function of $u_p$}
         \end{figure}
     \end{minipage}
-    \caption{Logarithmic fit}
 \end{figure}
-
-Thus,
-\begin{align*}
-    \boxed{g_w(u_p) = 22.6 \ln(u_p - 1110)- 51 }
-\end{align*}
-and,
-\begin{align*}
-    g'_w(u_p) = \frac{22.6}{u_p - 1110}
-\end{align*}
-
-
-\subsubsection{Parameter estimation and validation using static mapping with propeller}
-Form eqn.~\ref{eqn:prop} and introducing the normalized input from eqn.~\ref{eqn:norm_in}:
-
-\begin{align*}
-    & J\dot \omega + (K_rK_v + b_f) \omega + C_D \omega^2 + M_f = u K_r V_{in}\\
-    %===
-    \implies & J\dot \omega + (K_rK_v + b_f) \omega + C_D \omega^2 + M_f = \left( (K_r K_v  + b_f) u_\omega + \frac{M_f}{\hat V_{in}} \right) V_{in}\\
-    %===
-    \implies & J\dot \omega + (K_rK_v + b_f) \omega + C_D \omega^2 + M_f \left(1 - \frac{V_{in}}{\hat V_{in}} \right) = (K_r K_v  + b_f) u_\omega V_{in}\\
-\end{align*}
-At steady-state:
-\begin{align*}
-    & (K_rK_v + b_f) \omega + C_D \omega^2 + M_f \left(1 - \frac{V_{in}}{\hat V_{in}} \right) - (K_r K_v  + b_f) u_\omega V_{in} = 0\\
-    & \text{Let:}\\
-    & b_e = (K_r K_v  + b_f) \\
-    & \delta \hat v = \left(1 - \frac{V_{in}}{\hat V_{in}} \right)\\
-    \implies &  b_e \omega + C_D \omega^2 + M_f \delta \hat v = b_e V_{in} u_\omega\\
-    \implies & C_D \omega^2 = b_e V_{in} u_\omega - b_e \omega - M_f \delta \hat v\\
-\end{align*}
-Assuming, $V_{in} \approx \hat V_{in} \implies \delta \hat v = 0$
-\begin{align*}
-    C_D \omega^2 &= b_e \lr{ V_{in} u_\omega - \omega}
-\end{align*}
-Thus we have the least-square estimate of $b_e$:
-\begin{align*}
-    b_e &= 2.7529e-05
-\end{align*}
