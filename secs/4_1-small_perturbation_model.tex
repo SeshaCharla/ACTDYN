@@ -1,0 +1,32 @@
+% ==============================================================================
+\subsection{Small Perturbation Model}
+We get the linearised model using small perturbtation:
+\begin{align*}
+    J \delta \dot \omega + b_m \delta \omega + 2 C_D \omega_0 \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}\\
+    J \delta \dot \omega + (b_m + 2 C_D \omega_0) \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}\\
+    \text{Laplace Transform:} \qquad \qquad &\\
+     \lr{Js + (b_m + 2 C_D \omega_0)} \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}
+\end{align*}
+Thus we have the trannsfer function model:
+\begin{align*}
+    \frac{\delta \omega(s)}{\delta u_\omega (s)} &= \frac{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}{Js + (b_m + 2 C_D \omega_0)}
+\end{align*}
+
+Thus both gain and time-constant increase with the nominal rpm. Getting the gain and cut-off frequency using the standard first-order model:
+\begin{align*}
+    \frac{\delta \omega(s)}{\delta u_w(s)} &= \frac{k_m}{s + \omega_m} = \frac{V_{in} b_m + 2V_{in}^2C_D u_{\omega_0}}{Js + (b_m + 2 C_D \omega_0)}\\
+    \text{Where, } \qquad &\\
+    k_p &= \frac{V_{in}}{J} \lr{ b_m + 2V_{in}C_D u_{\omega_0}}\\
+    \omega_p &= \frac{1}{J}\lr{b_m + 2 C_D \omega_0}
+\end{align*}
+
+This information will be used for establishing the validity of identified model.
+
+In case of using $u_p$ as input:
+\begin{align*}
+    u_\omega &= a u_p + b\\
+    \implies \delta u_\omega &= a \delta u_p\\
+    \implies \frac{\delta \omega(s)}{\delta u_p(s)} &= \frac{1}{a}\frac{k_p}{s + \omega_p}
+\end{align*}
+
+Thus this results in variation of the static gain alone.

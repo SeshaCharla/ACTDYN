@@ -1,0 +1,112 @@
+Intoducing the input definition into the BLDC-motor model with propeller:
+\begin{align*}
+    J\dot \omega + b_m \omega + C_D \omega^2 + M_f &= u K_r V_{in} = K_r V_{in} g_\omega(u_\omega, \hat V_{in})\\
+    \implies  J \dot \omega + b_m \omega + C_D \omega^2 + M_f &= K_r V_{in} \lr{\frac{b_m}{K_r} u_\omega + \frac{\hat V_{in}}{K_r} C_D u_\omega^2 + \frac{M_f}{K_r  \hat V_{in}}}\\
+    J \dot \omega + b_m \omega + C_D \omega^2 + M_f \lr{1 - \frac{V_{in}}{\hat V_{in}}} &= V_{in} b_m u_\omega + V_{in} \hat V_{in} C_D u_\omega^2
+\end{align*}
+
+\itbf{Note on Voltage:} The battery voltage is assumed to be constant with small variations that can be introduced as uncertainities.
+\begin{align*}
+    \hat V_{in} &= V_{in} ( 1 + \delta v)
+    \implies \frac{V_{in}}{\hat V_{in}} = 1 - \delta v
+    \implies \lr{1 - \frac{V_{in}}{\hat V_{in}}} = \delta v
+\end{align*}
+\begin{equation}
+    J \dot \omega + b_m \omega + C_D \omega^2 + M_f \delta v = V_{in} b_m u_\omega + V_{in}^2 (1 + \delta v) C_D u_\omega^2
+\end{equation}
+
+%===============================================================================
+\subsection{Parametric Identification model for BLDC motor - propeller dyanmcis}
+We have:
+\begin{equation*}
+    J \dot \omega + b_m \omega + C_D \omega^2 + M_f \delta v = V_{in} b_m u_\omega + V_{in}^2 (1 + \delta v) C_D u_\omega^2
+\end{equation*}
+
+
+
+% Hence, we have the continuous parametric model:
+% $$ \dot \omega =
+%     \underbrace{\begin{bmatrix}
+%     - \omega^2 & - \omega  & -1
+% \end{bmatrix}}_{\Phi^T(\omega)}
+% \underbrace{\begin{bmatrix}
+%     \frac{C_{D}}{J} \\
+%     \frac{(K_rK_v + b_f)}{J}  \\
+%     M_f \left( 1 - \frac{V_{in}}{\hat V_{in}}\right)
+% \end{bmatrix} }_{\pmb \theta}
+%     +\left(\frac{(K_rK_v + b_f)}{J} V_{in}\right) u_{\omega}
+%  $$
+
+% Let,
+% \begin{align*}
+%     a_1 = \frac{C_{D}}{J}  \qquad
+%     a_2 &= \frac{(K_rK_v + b_f)}{J} \qquad
+%     a_3 =   M_f \left( 1 - \frac{V_{in}}{\hat V_{in}}\right)\\
+%     \\
+%     \pmb \theta = \begin{bmatrix}a_1 & a_2 & a_3 \end{bmatrix}^T &\qquad
+%     b = \frac{(K_rK_v + b_f)}{J} V_{in} = a_2 V_{in}
+% \end{align*}
+
+% $$\therefore \dot \omega = \Phi^T(\omega) \pmb \theta + b u$$
+
+% \subsubsection{Descritezed Parametric Model}
+% Descritizing the above model using euler-method $\left(\dot \omega = \frac{\omega[k] - \omega[k-1]}{h}\right)$, with $h$ as the sampling interval:
+
+% \begin{align*}
+%     \frac{\omega[k] - \omega[k-1]}{h} &=
+%     \begin{bmatrix} - \omega^2[k-1] & - \omega[k-1]  &  -1 \end{bmatrix}
+%     \begin{bmatrix}
+%         a_1 \\ a_2 \\ a_3
+%     \end{bmatrix}
+%     + bu[k-1]\\
+%     %===
+%     \omega[k] &= h \begin{bmatrix} - \omega^2[k-1] & - \omega[k-1]  & -1 \end{bmatrix}
+%     \begin{bmatrix}
+%         a_1 \\
+%         a_2 - \frac{1}{h} \\
+%         a_3 \\
+%     \end{bmatrix}
+%     + b  h u[k-1]\\
+%     %===
+%     &= h \begin{bmatrix} - \omega^2[k-1] & -\omega[k-1] & -1 & u[k] \end{bmatrix}
+%     \begin{bmatrix}
+%         a_1 \\
+%         a_2 - \frac{1}{h} \\
+%         a_3 \\
+%         b
+%     \end{bmatrix}
+% \end{align*}
+
+% Let,
+% \begin{align*}
+%     \pmb \theta_h = h
+%     \begin{bmatrix}
+%         a_1 \\
+%         a_2 - \frac{1}{h} \\
+%         a_3 \\
+%         b
+%     \end{bmatrix} =
+%     h
+%     \begin{bmatrix}
+%         \frac{C_{D}}{J} \\
+%         \frac{(K_rK_v + b_f)}{J} - \frac{1}{h}  \\
+%         M_f \left( 1 - \frac{V_{in}}{\hat V_{in}}\right)\\
+%         \frac{(K_rK_v + b_f)}{J} V_{in}
+%     \end{bmatrix}
+%     \qquad \text{and} \qquad
+%     \Phi(\omega[k-1], u[k])^T &=  \begin{bmatrix} - \omega^2[k-1] & -\omega[k-1] & -1 & u[k-1] \end{bmatrix}
+% \end{align*}
+
+% hence, we have the parametric model in least-squares form:
+% \begin{align*}
+%     \omega[k] &= \Phi(\omega[k-1], u[k-1])^T \pmb \theta_h
+% \end{align*}
+
+\subsubsection{Input singal (persistance of exitation and frequency limitation)}
+\textbf{Note:}
+\begin{enumerate}
+   \item PE order of a square wave of half-period m is m+1.
+   \item PE order of a single sine wave is 2.
+\end{enumerate}
+%Hence, a sum of sinusoids wave with atleast 3 waves within the frequency of 45 Hz (the limitation is due to the structure) can be used to estimate the parameters and the coefficients of force and torque generated.
+%
