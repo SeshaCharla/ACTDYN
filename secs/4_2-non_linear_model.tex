@@ -1,15 +1,27 @@
 %===============================================================================
-\subsection{Non-linear Model Parameter Identification}
+\subsection{Non-linear Model -- Discrete Least-squares form}
 We have:
 $$J \dot \omega + b_m \omega + C_D \omega^2 + M_f \delta v = V_{in} b_m u_\omega + V_{in}^2 (1 + \delta v) C_D u_\omega^2$$
 As $C_D$ is a known constant (from static experiments):
 \begin{align*}
     C_D \omega^2 &= -(J \dot \omega + b_m \omega + M_f \delta v) + V_{in} b_m u_\omega + V_{in}^2 (1 + \delta v) C_D u_\omega^2\\
-    C_D \omega^2 &= \bm{-\dot \omega & -\omega & -M_f & u_\omega & C_D u_\omega ^2} \bm{J & b_m & \delta v & V_{in} b_m & V_{in}^2 (1 - \delta v)}^T\\
+    &= \bm{-\dot \omega & -\omega & -M_f & u_\omega & C_D u_\omega ^2} \bm{J & b_m & \delta v & V_{in} b_m & V_{in}^2 (1 - \delta v)}^T
+\end{align*}
+Descritizing the above system (Euler Method):
+\begin{align*}
+    C_D \omega[k]^2 &= -(Jf_s \lr{\omega[k+1]-\omega[k]} + b_m \omega[k] + M_f \delta v) + V_{in} b_m u_\omega[k] + V_{in}^2 (1 + \delta v) C_D u_\omega[k]^2\\
+    &=\bm{-f_s \omega[k+1] & \omega[k] & -M_f & u_\omega[k] & C_D u_\omega[k]^2}\bm{J & (J f_s - b_m) & \delta v & V_{in} b_m & V_{in}^2 (1 + \delta v)}^T
+\end{align*}
+We have the following bounds on parameters:
+\begin{align*}
+    &J \geq 0, \quad b_m \geq 0, \quad -1 \leq \delta v \leq 1, \quad and \quad V_{in} \geq 0\\
 \end{align*}
 
 
-\textbf{Note:Input singal (persistance of exitation and frequency limitation)}
+
+\subsection{Nonlinear Model Parameter Estimation}
+
+\textbf{Note:} For input singal persistance of exitation and frequency limitation:
 \begin{enumerate}
    \item PE order of a square wave of half-period m is m+1.
    \item PE order of a single sine wave is 2.
