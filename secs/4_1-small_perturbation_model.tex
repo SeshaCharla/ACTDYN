@@ -39,29 +39,6 @@ Thus this results in variation of the static gain alone.
 \subsubsection{Linearized Model Parameter Estimation}
 The response of the system to Sum-of-Sinusoids signal at $250 \, Hz$ and $50 \mu s$ (PWM) amplitude containing $299$ frequencies in the range $[0.01, 30]\,Hz$ is used for first-order model parameter identification. The nominal inputs and the corresponding $rpm$ is tabulated in Table~\ref{tab::nom_in}. The identified models are validated against the response of a chirp signal with the same frequency range and sampling frequency. The validation results are plotted in Section~\ref{sec::small_perturb_valid}.
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{c c c c}
-        \hline \hline
-        Expt. & $u_{p_0}$ $(\mu s)$& $u_{\omega_0}$ $(rad/(s.V))$ & $\omega_0$ $(rad/s)$ \\ \hline \hline
-            1 & 1250      &  22.7035       &  347.1147   \\
-            2 & 1300      &  26.1848       &  405.6932   \\
-            3 & 1350      &  29.6660       &  460.4567   \\
-            4 & 1400      &  33.1472       &  515.9106   \\
-            5 & 1450      &  36.6284       &  587.6871   \\
-            6 & 1500      &  40.1096       &  646.5961   \\
-            7 & 1550      &  43.5908       &  703.7016   \\
-            8 & 1600      &  47.0720       &  756.4896   \\
-            9 & 1650      &  50.5532       &  806.9497   \\
-           10 & 1700      &  54.0344       &  850.6007   \\
-           11 & 1750      &  57.5156       &  896.7785   \\
-           \hline \hline
-    \end{tabular}
-    \caption{Nominal Inputs}
-    \label{tab::nom_in}
-\end{table}
-
-
 The estimates static-gain and cut-off frequencies are plotted with nominal inputs. The corresopnding parameters relating them to the nominal inputs are estimated using least-squares method.
 
 The $V_{in}$ and $K$ plot demonstrates the validity of their relationship when the $V_{in}$ variation is inclued, i.e.,
@@ -92,6 +69,9 @@ The variation of cut-off frequency with nominal rpm gives the esitmates of prope
 \end{figure}
 
 
+
+\subsubsection{Validation using the response of the full non-linear model}
+We have the model parameters identified:
 \begin{table}[H]
     \centering
     \begin{tabular}{c l l}
@@ -105,3 +85,27 @@ The variation of cut-off frequency with nominal rpm gives the esitmates of prope
     \end{tabular}
     \caption{Summary of parameter estimates from staic and small-perturbation experiments}
 \end{table}
+
+Assuming $\delta v = 0$ we have the non-linear model of the system eqn~\ref{eqn::nl_model}:
+\begin{align*}
+    J \dot \omega + b_m \omega + C_D \omega^2 = V_{in} b_m u_\omega + V_{in}^2 C_D u_\omega^2
+\end{align*}
+The above model is simulated with the identified parameters using a square wave and chirp input whose amplitude covers the full operating range. The results of the simulation are then compared with the experimental data.
+\begin{figure}[H]
+    \begin{minipage}{0.49\textwidth}
+        \begin{figure}[H]
+            \includegraphics[width = \textwidth]{./figs/nl_valid/square_validation.eps}
+            \caption*{Square Wave Input}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \begin{figure}[H]
+            \includegraphics[width = \textwidth]{./figs/nl_valid/chirp_validation.eps}
+            \caption*{Chirp Input}
+        \end{figure}
+    \end{minipage}
+    \caption{Model Validation}
+    \label{fig::model_valid}
+\end{figure}
+
+Form the Figure~\ref{fig::model_valid}, it can be concluded that the model parameters are estimated with a reasonable accuracy. The error in simulation as compared to the esperiment can be primarily attributed to theh $\delta v$ that needs to me estimated in real-time.

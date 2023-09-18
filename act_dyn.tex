@@ -41,7 +41,7 @@
 
 
 
-\title{Parametric Model Identification for Motor-Propeller Actuator Dynamics}
+\title{Identification and Control of Multirotor Actuator Dynamics with RPM feedback}
 \author{Sesha Charla}
 \date{\today}
 
@@ -53,6 +53,7 @@
 \
 %===============================================================================
 \newpage
+\part{Model Parameter Identification}
 \section{Brushless DC motor model}
 \input{./secs/1_1-bldc_static.tex}
 \input{./secs/1_2-bldc_dyn_noprop.tex}
@@ -71,9 +72,11 @@
 \section{BLDC Motor with Propeller Model -- Parameter Estimation}
 \input{./secs/4_0-bldc_prop_model.tex}
 \input{./secs/4_1-small_perturbation_model.tex}
-\input{./secs/4_2-non_linear_model.tex}
+%\input{./secs/4_2-non_linear_model.tex}
 
 %===============================================================================
+\newpage
+\part{Control}
 \newpage
 \section{Conclusion: Model and Model Parameters}
 \subsection{Parametric Form}
