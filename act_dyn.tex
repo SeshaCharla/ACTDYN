@@ -49,8 +49,6 @@
 \begin{document}
 \maketitle
 \tableofcontents
-\newpage
-\
 %===============================================================================
 \newpage
 \part{Model Parameter Identification}
@@ -72,22 +70,34 @@
 \section{BLDC Motor with Propeller Model -- Parameter Estimation}
 \input{./secs/4_0-bldc_prop_model.tex}
 \input{./secs/4_1-small_perturbation_model.tex}
-%\input{./secs/4_2-non_linear_model.tex}
 
 %===============================================================================
 \newpage
 \part{Control}
-\newpage
-\section{Conclusion: Model and Model Parameters}
-\subsection{Parametric Form}
 
+\input{secs/5-control_model.tex}
+%===
+\section{Adaptive Robust Control Designs}
+\subsection{Direct Adaptive Robust Control Design (ARC)}
+\subsection{Direct-Indirect Adaptive Robust Control Design (DIARC)}
+%===
+\section{Disturbance Observer based Controller Designs}
+\subsection{DOB Design}
+\subsection{Active Disturbance Rejection Controller Design (ADRC)}
+
+\section{Comparative Study}
+
+
+
+
+%===============================================================================
+\newpage
+\section{Conclusion}
 \newpage
 \section{Appendix}
 \input{secs/appendix.tex}
-
 %===============================================================================
 %\newpage
-%\section{Gyroscopic Effects of Propeller Inertia}
 %===============================================================================
 \newpage
 \bibliographystyle{unsrt}

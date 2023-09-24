@@ -1,0 +1,45 @@
+\section{Control Model and Input}
+From parameter estimates (Table~\ref{tab::parm_ests}), it can be seen that the
+estimate of total 'damping' factor $( b_m )$ is zero. Thus, the linear term of
+the control input in the RHS of eqn.~\ref{eqn::nl_model} can be ignored.
+Let $u = u_\omega ^2 $ be the control input to the system for which we are going
+to design the feedback controller. Incorporating the above two assumptions into
+eqn.~\ref{eqn::nl_model}, we have the control form of the model:
+\begin{equation} \label{eqn::control_form}
+    J \dot \omega + b_m \omega + C_D \omega^2 + M_f \delta v = V_{in}^2 (1 + \delta v) C_D u
+\end{equation}
+
+We have the following bounds on the control input:
+\begin{align*}
+    u &= u_\omega^2 = \lr{a u_p + b}^2\\
+    \implies u_{min} &= \lr{a u_{p_{min}}  + b}^2 = \lr{0.0696 \times 1110 - 64.3266}^2 = 167.1694\\
+    \implies u_{max} &= \lr{a u_{p_{max}}  + b}^2 = \lr{0.0696 \times 1890 - 64.3266}^2 = 4518.1789\\
+\end{align*}
+
+The goal of feedback control design for the actuator is two-fold:
+\begin{enumerate}
+\item Compensate for the input-uncertainities, un-modelled disturbances and
+model-structure errors.
+\item Make the actuator track the response of a second-order transfer function
+with no over-shoot of the form:
+\begin{align*}
+    G_{ref}(s) &= \frac{1}{s^2 + 2 \zeta \omega_{ref} + \omega_{ref}^2}
+    && \zeta = \frac{1}{\sqrt{2}} = 0.707
+\end{align*}
+Such that, $\omega_{ref}$ results in the maximum possible bandwidth in presence
+of uncertainties mentioned above.
+\end{enumerate}
+
+To this end, two feedback control design theories are used:
+\begin{enumerate}
+    \item Adaptive robust control (ARC) theory based designs:
+    \begin{enumerate}
+        \item Direct/Indirect Adaptive Robust Controller (DIARC).
+        \item ARC design with parameter estimation only for the disturbances(Disturbance ARC) for comparing with the classical DOB design.
+    \end{enumerate}
+    \item Disturbance Observer (DOB) base designs:
+    \begin{enumerate}
+        \item Classical DOB design.
+        \item Active Disturbance Rejection Controller (ADRC).
+    \end{enumerate}
+\end{enumerate}
