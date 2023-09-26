@@ -68,6 +68,12 @@ The variation of cut-off frequency with nominal rpm gives the esitmates of prope
     \end{minipage}
 \end{figure}
 
+Also, form the static gain values we can estimate the maximum value of
+$\abs{\delta v}$ as follows:
+\begin{align*}
+    \abs{\delta v}_{max} = \frac{ \max\lr{\abs{K - V_{in}}}}{V_{in}} = 0.2
+\end{align*}
+
 
 
 \subsubsection{Validation using the response of the full non-linear model}
@@ -80,9 +86,9 @@ We have the model parameters identified:
         Parameter & Value & & $\sigma$            \\ \hline \hline
         $C_T$ & $7.2581 \times 10^{-06}$ & $N/(rad/s)^2$   & $4.4522 \times 10^{-8}$ \\
         $C_D$ & $3.6088 \times 10^{-08}$ & $N.m/(rad/s)^2$ & $1.3964 \times 10^{-9}$ \\
-        $b_m$ & $0.0$                    & $N.m/(rad/s)$   & $4.603 \times 10^{-6}$  \\
+        $b_m$ & $0.0$                    & $N.m/(rad/s)$   & $4.6003 \times 10^{-6}$  \\
         $M_f$ & $1.3135 \times 10^{-3}$  & $N.m$           & $4.5277 \times 10^{-3}$ \\
-        $J$   & $3.2238 \times 1^{-6}$   & $Kg.m^2$        & $7.0053 \times 10^{-6}$ \\
+        $J$   & $3.2238 \times 10^{-6}$   & $Kg.m^2$        & $7.0053 \times 10^{-6}$ \\
         \hline \hline
     \end{tabular}
     \caption{Summary of parameter estimates from static and small-perturbation experiments}
