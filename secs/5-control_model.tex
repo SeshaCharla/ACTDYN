@@ -131,19 +131,18 @@ Let, $\omega_d(t)$ be the desired trajectory that the system needs to track
 \begin{align*}
     s &= \omega - \omega_d \quad \implies \dot s = \dot \omega - \dot \omega_d
 \end{align*}
-Thus, subtracting $\theta_1 \omega_d$ on both sides of eqn.~\ref{eqn::almst_ctrl_mdl}.
-\begin{align*}
-    \theta_1 (\dot \omega - \dot \omega_d) &= u - \theta_1 \omega_d - \theta_2 \omega - \theta_3 \omega^2 + d(t)\\
-    \text{Let,} \qquad\\
-    \pmb \theta &= \bm{\theta_1 & \theta_2 & \theta_3}^T\\
-    \pmb \phi &= \bm{-\omega_d & -\omega & - \omega^2}.T\\
-    \implies \theta_1 \dot s &= u + \pmb \phi^T \pmb \theta + d(t)
-\end{align*}
 Dividing the disturbance into high-frequency component and a slowly varying
 component, let, $$d(t) = d_0 + \Delta(t)$$
+Thus, subtracting $\theta_1 \omega_d$ on both sides of eqn.~\ref{eqn::almst_ctrl_mdl}.
+\begin{align*}
+    \theta_1 (\dot \omega - \dot \omega_d) &= u - \theta_1 \omega_d - \theta_2 \omega - \theta_3 \omega^2 + d_0 + \Delta(t)\\
+    \text{Let,} \qquad\\
+    \pmb \theta &= \bm{\theta_1 & \theta_2 & \theta_3 & d_0}^T\\
+    \pmb \phi &= \bm{-\omega_d & -\omega & - \omega^2 & 1}^T\\
+\end{align*}
 Thus we have the model for tracking error dynamics:
 \begin{equation}\label{eqn::error_dyn}
-    \theta_1 \dot s = u + \pmb \phi^T \pmb \theta + d_0 + \Delta(t)
+    \theta_1 \dot s = u + \pmb \phi^T \pmb \theta + \Delta(t)
 \end{equation}
 
 

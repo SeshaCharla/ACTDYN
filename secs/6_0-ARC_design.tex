@@ -1,3 +1,5 @@
+\subsection{Model compensation input design with parameter adaption}
+Let, From eqn.~\ref{eqn::error_dyn}:
 We define, \itbf{Discontinuous projection mapping} $Proj()$ for a vector as follows:
 \begin{align*}
     Proj_{\hat \theta} (\bullet) &= \bm{Proj_{\hat \theta_1}(\bullet_1), &
@@ -6,6 +8,8 @@ We define, \itbf{Discontinuous projection mapping} $Proj()$ for a vector as foll
                                         Proj_{\hat \theta_n}(\bullet_n)}\\
     Proj_{\hat \theta_i}(\bullet_i) &= \begin{cases}
         0 & \text{if } \begin{cases}
+                        \hat \theta_i &= \hat \theta_{i_{min}} \text{  and  } \bullet_i < 0\\
+                        \hat \theta_i &= \hat \theta_{i_{max}} \text{  and  } \bullet_i > 0\\
                        \end{cases}\\
         \bullet_i & \text{otherwise}
     \end{cases}
