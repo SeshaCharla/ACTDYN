@@ -1,18 +1,10 @@
-\subsection{Model compensation input design with parameter adaption}
-Let, From eqn.~\ref{eqn::error_dyn}:
-We define, \itbf{Discontinuous projection mapping} $Proj()$ for a vector as follows:
-\begin{align*}
-    Proj_{\hat \theta} (\bullet) &= \bm{Proj_{\hat \theta_1}(\bullet_1), &
-                                        Proj_{\hat \theta_2}(\bullet_2), &
-                                        \hdots, &
-                                        Proj_{\hat \theta_n}(\bullet_n)}\\
-    Proj_{\hat \theta_i}(\bullet_i) &= \begin{cases}
-        0 & \text{if } \begin{cases}
-                        \hat \theta_i &= \hat \theta_{i_{min}} \text{  and  } \bullet_i < 0\\
-                        \hat \theta_i &= \hat \theta_{i_{max}} \text{  and  } \bullet_i > 0\\
-                       \end{cases}\\
-        \bullet_i & \text{otherwise}
-    \end{cases}
-\end{align*}
+In this section, a discontinuous projection based direct adaptive robust control
+is implemented. Though the parameter convergence and tracking performance is
+slightly lower than the  more advanced designs such as IARC and DIARC, DARC has
+the advantage of being least computationally complex among them, resulting in
+faster sampling times in resource limited scenarios.
 
-\subsection{Adaptive Robust Control Design (ARC) with only disturbance estimation}
+\input{secs/6_1-input_design.tex}
+\input{secs/6_2-stability_proof.tex}
+\input{secs/6_3-tunning.tex}
+\input{secs/6_4-only_dist.tex}
