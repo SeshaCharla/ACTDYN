@@ -1,13 +1,13 @@
 % ==============================================================================
 \subsection{Small Perturbation Model}
-We get the linearised model using small perturbtation and neglecting the gain variation $(\delta v)$:
+We get the linearized model using small perturbation and neglecting the gain variation $(\delta v)$:
 \begin{align*}
     J \delta \dot \omega + b_m \delta \omega + 2 C_D \omega_0 \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}\\
     J \delta \dot \omega + (b_m + 2 C_D \omega_0) \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}\\
     \text{Laplace Transform:} \qquad \qquad &\\
      \lr{Js + (b_m + 2 C_D \omega_0)} \delta \omega  &= \delta u_\omega \lr{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}
 \end{align*}
-Thus we have the trannsfer function model:
+Thus we have the transfer function model:
 \begin{align*}
     \frac{\delta \omega(s)}{\delta u_\omega (s)} &= \frac{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}{Js + (b_m + 2 C_D \omega_0)}
 \end{align*}
@@ -22,7 +22,7 @@ Also, we have the following relationship between the nominal input and outputs f
     \implies \omega_m &= \frac{1}{J}\lr{b_m + 2 C_D \omega_0}
 \end{align*}
 
-Thus time-constant decreases with the nominal rpm and the static gain is purely a funciton on the battery voltage.
+Thus, time-constant decreases with the nominal rpm and the static gain is purely a function on the battery voltage.
 
 This information will be used for establishing the validity of identified model. Sum-of-Sinusoids input is used around a nominal input for generating the frequency response of the system to identify the model.
 
@@ -33,7 +33,7 @@ In case of using $u_p$ as input:
     \implies \frac{\delta \omega(s)}{\delta u_p(s)} &= \lr{\frac{1}{a}}\frac{K_m}{\tau_m s + 1}
 \end{align*}
 
-Thus this results in variation of the static gain alone.
+Thus, this results in variation of the static gain alone.
 
 
 \subsubsection{Linearized Model Parameter Estimation}
@@ -72,16 +72,18 @@ The variation of cut-off frequency with nominal rpm gives the esitmates of prope
 
 \subsubsection{Validation using the response of the full non-linear model}
 We have the model parameters identified:
+
 \begin{table}[H]
     \centering
-    \begin{tabular}{c l l}
+    \begin{tabular}{c l l c}
         \hline \hline
-        Parameter & Value & \\ \hline \hline
-        $C_T$ & $7.2581 \times 10^{-06}$ & $N/(rad/s)^2$  \\
-        $C_D$ & $3.6088 \times 10^{-08}$ & $N.m/(rad/s)^2$ \\
-        $b_m$ & $0.0$                    & $N.m/(rad/s)$\\
-        $M_f$ & $1.3135 \times 10^{-3}$  & $N.m$\\
-        $J$   & $3.2238 \times 10^{-6}$  & $Kg .m^2$ \\\hline \hline
+        Parameter & Value & & $\sigma$            \\ \hline \hline
+        $C_T$ & $7.2581 \times 10^{-06}$ & $N/(rad/s)^2$   & $4.4522 \times 10^{-8}$ \\
+        $C_D$ & $3.6088 \times 10^{-08}$ & $N.m/(rad/s)^2$ & $1.3964 \times 10^{-9}$ \\
+        $b_m$ & $0.0$                    & $N.m/(rad/s)$   & $4.603 \times 10^{-6}$  \\
+        $M_f$ & $1.3135 \times 10^{-3}$  & $N.m$           & $4.5277 \times 10^{-3}$ \\
+        $J$   & $3.2238 \times 1^{-6}$   & $Kg.m^2$        & $7.0053 \times 10^{-6}$ \\
+        \hline \hline
     \end{tabular}
     \caption{Summary of parameter estimates from static and small-perturbation experiments}
     \label{tab::parm_ests}

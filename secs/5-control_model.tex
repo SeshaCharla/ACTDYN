@@ -30,16 +30,34 @@ Such that, $\omega_{ref}$ results in the maximum possible bandwidth in presence
 of uncertainties mentioned above.
 \end{enumerate}
 
-To this end, two feedback control design theories are used:
+To this end, two feedback control designs based on Adaptive Robust Control
+Theory (ARC) are implemented, and their performances are compared:
 \begin{enumerate}
-    \item Adaptive robust control (ARC) theory based designs:
-    \begin{enumerate}
-        \item Direct/Indirect Adaptive Robust Controller (DIARC).
-        \item ARC design with parameter estimation only for the disturbances(Disturbance ARC) for comparing with the classical DOB design.
-    \end{enumerate}
-    \item Disturbance Observer (DOB) base designs:
-    \begin{enumerate}
-        \item Classical DOB design.
-        \item Active Disturbance Rejection Controller (ADRC).
-    \end{enumerate}
+    \item Direct/Indirect Adaptive Robust Controller (DIARC).
+    \item ARC design with parameter estimation only for the disturbances(Disturbance ARC).
 \end{enumerate}
+
+%===============================================================================
+\subsection{Parametric model and parameter bounds for ARC design}
+From eqn.~\ref{eqn::control_form}:
+\begin{align*}
+    \dot \omega &= -\lr{\frac{C_D}{J}} \omega^2 - \lr{\frac{b_m}{J}} \omega + \lr{\frac{V_{in}^2 C_D}{J}} u + \delta v \lr{\lr{\frac{V_{in}^2 C_D}{J}} u - M_f}\\
+    \text{Let, }\qquad &\\
+    \theta_1 &= \lr{\frac{C_D}{J}} \qquad
+    \theta_2 = \lr{\frac{b_m}{J}} \\
+    \theta_u &=  \lr{\frac{V_{in}^2 C_D}{J}} \qquad
+    d(t) + \Delta(t) = \delta v \lr{\lr{\frac{V_{in}^2 C_D}{J}} u - M_f}
+\end{align*}
+
+Thus, we have the parametric control model with lumped disturbances:
+\begin{align*}
+    \dot \omega &= - \theta_1 \omega^2 - \theta_2 \omega + \theta_u u + d(t) + \Delta(t)\\
+    &= \pmb \phi(\omega)^T \pmb \theta + \theta_u u + d(t) + \Delta(t)\\
+    \text{where, } \qquad \\
+    \pmb \phi &= \bm{-\omega^2 & - \omega}\\
+    \pmb \theta &= \bm{\theta_1 & \theta_2}
+\end{align*}
+
+The parameter bounds are obtained from the variance of estimates and the maximum
+value of $\delta v$. For the current design $\pm 2\sigma$ bounds are used for
+each of the $\theta$'s.
