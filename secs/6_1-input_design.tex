@@ -3,6 +3,7 @@ Let, the total control input be the sum of the following inputs:
 \begin{align*}
     u &= u_a + u_s \qquad u_s = u_{s_1} + u_{s_2}
 \end{align*}
+%===============================================================================
 \subsubsection{Model compensation input design with parameter adaption ($u_a$)}
 Let, From eqn.~\ref{eqn::error_dyn}, we chose $u_a$ such that it compensates for
 the error dynamics, i.e.,
@@ -35,6 +36,8 @@ The above mapping has the following properties:
     Proj_{\hat{\pmb\theta}} \lr{\Gamma \pmb \phi s} - \phi s \right] \leq 0 \:
     \forall t \qquad [\tilde{\pmb{\theta}} = \hat{\pmb\theta} - \pmb \theta]$
 \end{itemize}
+
+%===============================================================================
 
 \subsubsection{Robust feedback control input design}
 Substituting $u_a$ in eqn.~\ref{eqn::error_dyn}:
@@ -70,7 +73,8 @@ The above defined smoothing function, $S(.)$, has the following properties:
 0 \qquad $ $\because$ $s$ and $\sat \lr{\frac{h}{4 \varepsilon} s}$ have the
 same sign.
 
-\item[$P_4$:] $s \left[h \sign(s) - S(h\sign(s)) \right]$ is bounded.
+\item[$P_4$:] $s \left[h \sign(s) - S(h\sign(s)) \right]$ is bounded.\\
+\itbf{proof:}
 \begin{align*}
     s \left[h \sign(s) - S(h\sign(s)) \right] &= s \left[h \sign(s) - h \sat \lr{\frac{h}{4 \varepsilon} s} \right]
 \end{align*}
